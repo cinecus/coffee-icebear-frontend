@@ -1,46 +1,24 @@
 import React, { useState } from "react";
 import {
   Box,
-  Paper,
   Grid,
   Container,
   Typography,
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   Divider,
-  InputBase,
-  Button,
-  Card,
-  CardMedia,
-  CardContent,
-  Chip,
-  CardActions,
-  Stack,
   Accordion,
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SearchIcon from "@mui/icons-material/Search";
-import ListSharpIcon from "@mui/icons-material/ListSharp";
-import GridViewIcon from "@mui/icons-material/GridView";
-import { styled, alpha } from "@mui/material/styles";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
+
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { CardList } from "../components/order";
 import moment from "moment";
 import { useAppDispatch, useAppSelector } from "../store/store";
@@ -143,9 +121,6 @@ const order = () => {
           }}
         >
           <Box display="flex" sx={{ gap: "1rem" }}>
-            {/* <Typography variant='h6' fontWeight={600}>
-                  ตัวกรอง :
-                </Typography> */}
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DesktopDatePicker
                 label="ช่วงเวลาเริ่มต้น"
@@ -168,7 +143,7 @@ const order = () => {
           <Grid container mt={5}>
             {order.map((orderItem, i) => {
               return (
-                <Grid item md={12} mb={5}>
+                <Grid item md={12} mb={5} key={i}>
                   <CardList orderItem={orderItem} />
                 </Grid>
               );

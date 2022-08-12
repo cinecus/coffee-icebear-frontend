@@ -1,5 +1,3 @@
-import type { NextPage } from "next";
-import type { ReactElement, ReactNode } from "react";
 import Link from "next/link";
 import React, { useState } from "react";
 import {
@@ -18,12 +16,9 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
-import AdbIcon from "@mui/icons-material/Adb";
 import { menuListUnAuth, menuListAuth, settingList } from "../constant";
 import { useAppSelector } from "../store/store";
-import { SessionProvider, useSession, signIn, signOut } from "next-auth/react";
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import {  useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);

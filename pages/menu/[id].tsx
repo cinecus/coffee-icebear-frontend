@@ -1,56 +1,29 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Paper,
   Grid,
   Container,
   Typography,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Divider,
-  InputBase,
   Button,
-  Card,
-  CardMedia,
-  CardContent,
   Chip,
   CardActions,
   Modal,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SearchIcon from "@mui/icons-material/Search";
-import ListSharpIcon from "@mui/icons-material/ListSharp";
-import GridViewIcon from "@mui/icons-material/GridView";
-import { styled, alpha } from "@mui/material/styles";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { CardGrid, CardList } from "../../components/menu";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Image from "next/image";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 import FormGroup from "@mui/material/FormGroup";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { insertInit, addItemToCart } from "../../store/slices/cartSlice";
 import { useRouter } from "next/router";
 import { menu } from "../../constant/data";
 import { useForm, Controller, SubmitHandler, useWatch } from "react-hook-form";
-import { SessionProvider, useSession, signIn, signOut } from "next-auth/react";
+import {  useSession, signIn,  } from "next-auth/react";
 
 export async function getServerSideProps({ params }) {
   const singleMenu = menu.find((el) => el.id == params.id);
@@ -309,16 +282,6 @@ const SinglePageMenu = ({ singleMenu }) => {
                   <Divider />
                 </Box>
                 <Box my={5}>
-                  {/* <Box
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  sx={{ gap: "1rem" }}
-                >
-                  <IndeterminateCheckBoxIcon sx={{ fontSize: "2rem" }} />
-                  <Typography variant="h6">1</Typography>
-                  <AddBoxIcon sx={{ fontSize: "2rem" }} />
-                </Box> */}
                   <Box display="flex" justifyContent="end">
                     <Button
                       variant="outlined"

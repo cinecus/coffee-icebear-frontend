@@ -1,26 +1,23 @@
 import React, { useState } from "react";
-import { SessionProvider, useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import {
   Box,
   Paper,
   Grid,
   Container,
   Typography,
-  List,
-  ListItem,
-  FormControl,
   TextField,
   Button,
   Alert,
 } from "@mui/material";
-import { useForm, Controller, SubmitHandler, useWatch } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 
 interface FromInput {
   username: string;
   password: string;
 }
-// const signin= async()=>signIn()
+
 const signin = () => {
   const { control, handleSubmit } = useForm();
   const router = useRouter();
