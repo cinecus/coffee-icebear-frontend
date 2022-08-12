@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from '../store/store';
 import { SessionProvider, useSession, signIn } from 'next-auth/react';
 
-function MyApp({ Component, pageProps:{session,...pageProps} }: AppProps) {
+function MyApp({ Component, pageProps:{session,...pageProps} }: any) {
   return <Provider store={store}>
     <SessionProvider session={session}>
 {Component.auth ? (
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps:{session,...pageProps} }: AppProps) {
 export default MyApp
 
 
-function Auth({ children }) {
+function Auth({ children }:any) {
   const { data: session, status } = useSession()
   const isUser = !!session?.user
   React.useEffect(() => {

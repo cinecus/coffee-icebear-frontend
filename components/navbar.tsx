@@ -127,8 +127,8 @@ const Navbar = () => {
                     </MenuItem>
                   ))}
               <Divider sx={{ my: 0.5 }} />
-              {session && settingList.map(({ name, path }) => (
-                <div>
+              {session && settingList.map(({ name, path },i) => (
+                <div key={i}>
                   {name === "Logout" && <Divider sx={{ my: 0.5 }} />}
                   <MenuItem key={name} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">
@@ -184,7 +184,7 @@ const Navbar = () => {
                         <Badge
                           badgeContent={
                             !!cart
-                              ? `${cart.reduce((a, b) => a + b.qty, 0)}`
+                              ? `${cart.reduce((a:number, b:{qty:number}) => a + b.qty, 0)}`
                               : "0"
                           }
                           color="error"

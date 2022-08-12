@@ -23,13 +23,14 @@ import { CardList } from "../components/order";
 import moment from "moment";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { filterOrder,filterOrderByDate } from "../store/slices/orderSlice";
+import { singleOrderType } from "../types/order_types";
 
-const order = () => {
+const Order = () => {
   const dispatch = useAppDispatch();
   const [dateStart, setDateStart] = useState(moment().add(-7,'d'));
   const [dateEnd, setDateEnd] = useState(moment().add(1, "d"));
   const { order, filter } = useAppSelector((state) => state.order);
-  const handleChange = (newValue: Date | null,type:"start"|"end") => {
+  const handleChange = (newValue: any,type:"start"|"end") => {
     if(type=='start'){
       setDateStart(newValue)
       dispatch(filterOrderByDate({dateStart:newValue,dateEnd}))
@@ -141,10 +142,10 @@ const order = () => {
             </LocalizationProvider>
           </Box>
           <Grid container mt={5}>
-            {order.map((orderItem, i) => {
+            {order.map((orderItem:singleOrderType, i:number) => {
               return (
                 <Grid item md={12} mb={5} key={i}>
-                  <CardList orderItem={orderItem} />
+                  <CardList {...orderItem} />
                 </Grid>
               );
             })}
@@ -155,6 +156,6 @@ const order = () => {
   );
 };
 
-export default order;
+export default Order;
 
-order.auth = true;
+Order.auth = true;

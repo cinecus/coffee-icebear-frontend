@@ -23,8 +23,9 @@ import { CardGrid, CardList } from "../../components/menu";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { filterCategory,searchMenu } from "../../store/slices/menuSlice";
+import { singleMenuType } from "../../types/menu_types";
 
-const menu = () => {
+const Menu = () => {
   const [isMenuList, setIsMenuList] = useState(false);
   const [textSearch,setTextSearch] =useState('')
   const { menu, filter } = useAppSelector((state) => state.menu);
@@ -131,12 +132,12 @@ const menu = () => {
             </Box>
             <Grid container mt={5} display="flex" justifyContent="center">
               {!!menu
-                ? menu.map((card, i) => {
+                ? menu.map((card:singleMenuType, i:number) => {
                     return isMenuList ? (
                       <Grid item md={12} xs={12} mt={2}>
                         <Link href={{ pathname: `/menu/${card.id}` }}>
                           <a>
-                            <CardList key={i} card={card} />
+                            <CardList {...card} />
                           </a>
                         </Link>
                       </Grid>
@@ -144,7 +145,7 @@ const menu = () => {
                       <Grid item md={4} mt={2}>
                         <Link href={{ pathname: `/menu/${card.id}` }}>
                           <a>
-                            <CardGrid key={i} card={card} />
+                            <CardGrid {...card} />
                           </a>
                         </Link>
                       </Grid>
@@ -160,4 +161,4 @@ const menu = () => {
   );
 };
 
-export default menu;
+export default Menu;

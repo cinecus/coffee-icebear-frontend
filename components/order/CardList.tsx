@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import CloseIcon from "@mui/icons-material/Close";
+import { singleOrderType } from "../../types/order_types";
 
 const style = {
   position: "absolute",
@@ -24,8 +25,7 @@ const style = {
   p: 4,
 };
 
-export const CardList = ({ orderItem }) => {
-  console.log(orderItem);
+export const CardList:React.FC<singleOrderType> = ({ ...orderItem }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -139,6 +139,7 @@ export const CardList = ({ orderItem }) => {
                     position: "relative",
                     marginBottom: "1rem",
                   }}
+                  key={i}
                 >
                   <CardContent>
                     <Box

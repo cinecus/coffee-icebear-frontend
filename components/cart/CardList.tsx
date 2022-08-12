@@ -13,25 +13,13 @@ import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox
 import { useAppDispatch,useAppSelector } from "../../store/store";
 import {customizeCart,deleteItemByID} from "../../store/slices/cartSlice"
 
-type CartItem = {
-  id:number,
-  name:string,
-  type:string,
-  price:number,
-  addOnPrice:number,
-  sweetLevel:string,
-  addWhipCream:boolean,
-  addBrownie:boolean,
-  addCoffeeShot:boolean,
-  addBubble:boolean,
-  qty:number
-}
+import { singleCartType } from "../../types/cart_types";
 
-export const CardList = ({cartItem}:CartItem) => {
+export const CardList:React.FC<singleCartType> = ({...cartItem}) => {
   const dispatch = useAppDispatch()
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event:any) => {
     setAnchorEl(event.currentTarget);
   };
 

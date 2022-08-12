@@ -20,7 +20,7 @@ import { SessionProvider, useSession } from 'next-auth/react';
 import { insertOrder } from "../store/slices/orderSlice";
 import { setCartToEmpty } from "../store/slices/cartSlice";
 import { useRouter } from "next/router";
-
+import { singleCartType } from "../types/cart_types";
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
@@ -33,7 +33,7 @@ const style = {
   p: 4,
 };
 
-const cart = () => {
+const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
   const {order} = useAppSelector(state=>state.order)
   const dispatch = useAppDispatch()
@@ -75,7 +75,7 @@ const cart = () => {
                     <Typography variant="body1">รวม :</Typography>
                     <Typography variant="body1">
                       {cart.reduce(
-                        (prev, cur) =>
+                        (prev:number, cur:{price:number,addOnPrice:number,qty:number}) =>
                           prev + (cur.price + cur.addOnPrice) * cur.qty,
                         0
                       )}{" "}
@@ -94,7 +94,7 @@ const cart = () => {
                     <Typography variant="body1">รวมทั้งบิล :</Typography>
                     <Typography variant="body1">
                       {cart.reduce(
-                        (prev, cur) =>
+                        (prev:number, cur:{price:number,addOnPrice:number,qty:number}) =>
                           prev + (cur.price + cur.addOnPrice) * cur.qty,
                         0
                       )}{" "}
@@ -122,10 +122,10 @@ const cart = () => {
             <Divider sx={{ margin: "1rem 0" }} />
 
             {cart.length > 0 ? (
-              cart.map((cartItem, i) => {
+              cart.map((cartItem:singleCartType, i:number) => {
                 return (
-                  <Box>
-                    <CardList cartItem={cartItem} key={i} />
+                  <Box key={i}>
+                    <CardList {...cartItem }/>
                     <Divider sx={{ margin: "1rem 0" }} />
                   </Box>
                 );
@@ -158,7 +158,7 @@ const cart = () => {
           <Divider/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             ยอดชำระเงิน ทั้งหมด  {cart.reduce(
-                        (prev, cur) =>
+                        (prev:number, cur:{price:number,addOnPrice:number,qty:number}) =>
                           prev + (cur.price + cur.addOnPrice) * cur.qty,
                         0
                       )}  บาท
@@ -185,6 +185,6 @@ const cart = () => {
   );
 };
 
-export default cart;
+export default Cart;
 
 // cart.auth = true

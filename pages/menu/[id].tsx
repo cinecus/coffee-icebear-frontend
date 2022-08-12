@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import {  GetServerSideProps } from 'next'
+import { ParsedUrlQuery } from 'querystring'
 import {
   Box,
   Grid,
@@ -7,8 +9,6 @@ import {
   Divider,
   Button,
   Chip,
-  CardActions,
-  Modal,
 } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
@@ -25,8 +25,16 @@ import { menu } from "../../constant/data";
 import { useForm, Controller, SubmitHandler, useWatch } from "react-hook-form";
 import {  useSession, signIn,  } from "next-auth/react";
 
-export async function getServerSideProps({ params }) {
-  const singleMenu = menu.find((el) => el.id == params.id);
+import { singleMenuType } from "../../types/menu_types";
+
+interface IParams extends ParsedUrlQuery {
+  id: string
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // ...
+  const { id } = context.params as IParams
+  const singleMenu = menu.find((el:{id:string|number}) => el.id == id);
 
   return {
     props: {
@@ -34,6 +42,7 @@ export async function getServerSideProps({ params }) {
     },
   };
 }
+
 
 interface FromInput {
   sweetLevel: string;
@@ -43,7 +52,7 @@ interface FromInput {
   addBubble: boolean;
 }
 
-const SinglePageMenu = ({ singleMenu }) => {
+const SinglePageMenu:React.FC<singleMenuType> = ({ ...singleMenu }) => {
   const router = useRouter();
   const { cart } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();

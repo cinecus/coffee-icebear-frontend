@@ -18,12 +18,12 @@ interface FromInput {
   password: string;
 }
 
-const signin = () => {
+const Signin = () => {
   const { control, handleSubmit } = useForm();
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState("");
-  const onSubmit: SubmitHandler<FromInput> = async (data) => {
-    const res = await signIn("credentials", {
+  const onSubmit:any = async (data:FromInput) => {
+    const res:any = await signIn("credentials", {
       redirect: false,
       username: data.username,
       password: data.password,
@@ -115,4 +115,4 @@ const signin = () => {
   );
 };
 
-export default signin;
+export default Signin;

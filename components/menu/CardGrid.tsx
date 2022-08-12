@@ -9,8 +9,9 @@ import {
   CardActions,
   Box,
 } from "@mui/material";
+import { singleMenuType } from "../../types/menu_types";
 
-export const CardGrid = ({ card }) => {
+export const CardGrid:React.FC<singleMenuType> = ({ ...card }) => {
   const { id, name, description, type, category, price, img } = card;
   return (
     <Card sx={{ width:{md:'90%',xs:'100%'},position:'relative' }}>

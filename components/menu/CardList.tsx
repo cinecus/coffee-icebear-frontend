@@ -7,8 +7,9 @@ import {
   CardContent,
   Chip,
 } from "@mui/material";
+import { singleMenuType } from "../../types/menu_types";
 
-export const CardList = ({ card }) => {
+export const CardList:React.FC<singleMenuType>  = ({ ...card }) => {
   const { id, name, description, type, category, price, img } = card;
   return (
     <Card sx={{ display: "flex", width:'100%'}}>

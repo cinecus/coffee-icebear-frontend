@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {menu} from '../../constant/data'
+import { singleMenuType } from "../../types/menu_types";
 
 const initialState:any = {
     fetch_menu:menu,
@@ -15,13 +16,13 @@ const menuSlice = createSlice({
         filterCategory:(state,action)=>{
             switch (action.payload) {
                 case 'coffee':
-                    state.menu = state.fetch_menu.filter(el=>el.category==='coffee')
+                    state.menu = state.fetch_menu.filter((el:singleMenuType)=>el.category==='coffee')
                     break;
                 case 'tea':
-                    state.menu = state.fetch_menu.filter(el=>el.category==='tea')
+                    state.menu = state.fetch_menu.filter((el:singleMenuType)=>el.category==='tea')
                     break;
                 case 'milk':
-                    state.menu = state.fetch_menu.filter(el=>el.category==='milk')
+                    state.menu = state.fetch_menu.filter((el:singleMenuType)=>el.category==='milk')
                     break;
                 default:
                     state.menu = state.fetch_menu
@@ -30,11 +31,11 @@ const menuSlice = createSlice({
             state.filter = action.payload
         },
         getMenuByID:(state,action)=>{
-            state.singleMenu = state.fetch_menu.find(el=>el.id===action.payload)
+            state.singleMenu = state.fetch_menu.find((el:singleMenuType)=>el.id===action.payload)
         },
         searchMenu:(state,action)=>{
             console.log('action.payload', action.payload)
-            state.menu = state.fetch_menu.filter(el=>`${el.name}${el.description}${el.type}${el.category}`.toLowerCase().includes(action.payload.toLowerCase()))
+            state.menu = state.fetch_menu.filter((el:singleMenuType)=>`${el.name}${el.description}${el.type}${el.category}`.toLowerCase().includes(action.payload.toLowerCase()))
         }
     }
 })

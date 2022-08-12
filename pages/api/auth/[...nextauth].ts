@@ -47,7 +47,7 @@ export default NextAuth({
         },
         async session({session,token,user}) {
           session.accessToken = token.accessToken
-          session.user = token.user
+          // session.user = token.user
           return session
         }
       },
