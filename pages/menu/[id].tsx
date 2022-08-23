@@ -31,17 +31,17 @@ interface IParams extends ParsedUrlQuery {
   id: string
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  // ...
-  const { id } = context.params as IParams
-  const singleMenu = menu.find((el:{id:string|number}) => el.id == id);
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   // ...
+//   const { id } = context.params as IParams
+//   const singleMenu = menu.find((el:{id:string|number}) => el.id == id);
 
-  return {
-    props: {
-      singleMenu,
-    },
-  };
-}
+//   return {
+//     props: {
+//       singleMenu,
+//     },
+//   };
+// }
 
 
 interface FromInput {
@@ -52,9 +52,11 @@ interface FromInput {
   addBubble: boolean;
 }
 
-const SinglePageMenu:React.FC<singleMenuType> = ({ ...singleMenu }) => {
-  const router = useRouter();
+const SinglePageMenu:React.FC = () => {
+  const {query} = useRouter();
+  
   const { cart } = useAppSelector((state) => state.cart);
+  const singleMenu  = menu.find((el)=>el.id == +query.id!)  as singleMenuType
   const dispatch = useAppDispatch();
   const { control, handleSubmit } = useForm<FromInput>();
   const [addOnPrice, setAddOnPrice] = useState(0);
@@ -85,7 +87,9 @@ const SinglePageMenu:React.FC<singleMenuType> = ({ ...singleMenu }) => {
       signIn();
     }
   };
+  useEffect(()=>{
 
+  },[])
   useEffect(() => {
     // console.log(formWatch)
     const result = formWatch.reduce(
@@ -101,7 +105,7 @@ const SinglePageMenu:React.FC<singleMenuType> = ({ ...singleMenu }) => {
         <Grid container spacing={2}>
           <Grid item md={5} xs={12}>
             <Image
-              src={singleMenu.img[0]}
+              src={singleMenu.img[0]||''}
               layout="responsive"
               width={200}
               height={200}
@@ -299,7 +303,7 @@ const SinglePageMenu:React.FC<singleMenuType> = ({ ...singleMenu }) => {
                     >
                       <Typography variant="body1">เพิ่มลงตะกร้า</Typography>
                       <Typography variant="body1">
-                        ({singleMenu.price + addOnPrice} บาท)
+                        ({singleMenu?.price + addOnPrice} บาท)
                       </Typography>
                     </Button>
                   </Box>
