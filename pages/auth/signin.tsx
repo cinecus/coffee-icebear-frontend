@@ -96,8 +96,8 @@ const Signin = () => {
                   <Button variant="contained" type="submit">
                     เข้าสู่ระบบ
                   </Button>
-
-                  <Button variant="text">สมัครสมาชิก</Button>
+{/* 
+                  <Button variant="text">สมัครสมาชิก</Button> */}
                 </Box>
               </form>
               <Typography>

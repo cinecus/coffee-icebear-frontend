@@ -14,10 +14,10 @@ export const menuListUnAuth = [
         name:'สั่งเครื่องดื่ม !',
         path:'/menu'
     },
-    {
-        name:'สมัครสมาชิก',
-        path:'/auth/register'
-    },
+    // {
+    //     name:'สมัครสมาชิก',
+    //     path:'/auth/register'
+    // },
     {
         name:'เข้าสู่ระบบ',
         path:'/signin'
