@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {  GetServerSideProps } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+import { GetServerSideProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 import {
   Box,
   Grid,
@@ -23,26 +23,25 @@ import { insertInit, addItemToCart } from "../../store/slices/cartSlice";
 import { useRouter } from "next/router";
 import { menu } from "../../constant/data";
 import { useForm, Controller, SubmitHandler, useWatch } from "react-hook-form";
-import {  useSession, signIn,  } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 import { singleMenuType } from "../../types/menu_types";
 
 interface IParams extends ParsedUrlQuery {
-  id: string
+  id: string;
 }
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   // ...
-//   const { id } = context.params as IParams
-//   const singleMenu = menu.find((el:{id:string|number}) => el.id == id);
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // ...
+  const { id } = context.params as IParams;
+  const singleMenu = menu.find((el: { id: string | number }) => el.id == id);
 
-//   return {
-//     props: {
-//       singleMenu,
-//     },
-//   };
-// }
-
+  return {
+    props: {
+      singleMenu,
+    },
+  };
+};
 
 interface FromInput {
   sweetLevel: string;
@@ -52,11 +51,11 @@ interface FromInput {
   addBubble: boolean;
 }
 
-const SinglePageMenu:React.FC = () => {
-  const {query} = useRouter();
-  
+const SinglePageMenu: React.FC = () => {
+  const { query } = useRouter();
+
   const { cart } = useAppSelector((state) => state.cart);
-  const singleMenu  = menu.find((el)=>el.id == +query.id!)  as singleMenuType
+  const singleMenu = menu.find((el) => el.id == +query.id!) as singleMenuType;
   const dispatch = useAppDispatch();
   const { control, handleSubmit } = useForm<FromInput>();
   const [addOnPrice, setAddOnPrice] = useState(0);
@@ -72,7 +71,7 @@ const SinglePageMenu:React.FC = () => {
         id: cart.length + 1,
         name: singleMenu.name,
         type: singleMenu.type,
-        image: singleMenu.img[0],
+        image: singleMenu.img[0] as string,
         price: +singleMenu.price,
         addOnPrice: +addOnPrice,
         sweetLevel: data.sweetLevel,
@@ -87,9 +86,7 @@ const SinglePageMenu:React.FC = () => {
       signIn();
     }
   };
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
   useEffect(() => {
     // console.log(formWatch)
     const result = formWatch.reduce(
@@ -105,7 +102,8 @@ const SinglePageMenu:React.FC = () => {
         <Grid container spacing={2}>
           <Grid item md={5} xs={12}>
             <Image
-              src={singleMenu.img[0]||''}
+              src={singleMenu.img?.[0]}
+              alt={singleMenu.name}
               layout="responsive"
               width={200}
               height={200}

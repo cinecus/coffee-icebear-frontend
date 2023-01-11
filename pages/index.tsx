@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={7} sx={{display:'flex',justifyContent:'center'}}>
           <Box >
-          <Image src={icebear} />
+          <Image src={icebear} alt='icebear'/>
           </Box>
         </Grid>
         <Grid item xs={12} md={5} sx={{marginBlockStart:'3rem'}}>

@@ -43,6 +43,7 @@ export const CardList:React.FC<singleCartType> = ({...cartItem}) => {
             sx={{ gap: "0.5rem" }}
           >
             <Image
+            alt={cartItem.name}
               src={
                 cartItem.image
               }

@@ -149,7 +149,7 @@ export const CardList:React.FC<singleOrderType> = ({ ...orderItem }) => {
                       sx={{ gap: "1rem" }}
                     >
                       <Box>
-                        <Image src={item.image} width={120} height={120} />
+                        <Image src={item.image} width={120} height={120} alt={item.name} />
                       </Box>
                       <Box>
                         <Box display={"flex"} alignItems={"center"}>
